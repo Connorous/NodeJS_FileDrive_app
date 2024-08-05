@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div style="display: flex; gap: 100px">
+      <%- include('./layout') %>
+      <div>
+        <h1><%= title %></h1>
+        <h3>Welcome <%= user.email %></h3>
+        <% if (list_folders) { %>
+
+        <ul>
+          <% if (list_folders.length) { %>
+          <h2>Your Folders</h2>
+          <% list_folders.forEach(folder => { %>
+          <li>
+            <a href="<%= '/get-folder/' + folder.id %>"
+              ><h2><%= folder.name %></h2></a
+            >
+            <p>
+              date created: <%= folder.dateCreated.toLocaleDateString() %> <%=
+              folder.dateCreated.getHours() %>:<%=
+              folder.dateCreated.getMinutes() %>:<%=
+              folder.dateCreated.getSeconds() %>
+            </p>
+            <br />
+            <br />
+            <a href="<%= '/delete-folder/' + folder.id %>"
+              ><button>Delete Folder</button></a
+            >
+          </li>
+          <% }) %> <% } else { %>
+          <h2>You have no folders.</h2>
+          <a href="create-folder">Create a Folder</a>
+          <% } %>
+        </ul>
+        <% } %>
+        <br />
+      </div>
+    </div>
+  </body>
+</html>

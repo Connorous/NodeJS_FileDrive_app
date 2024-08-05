@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1><% title %></h1>
+    <div style="display: flex; gap: 100px">
+      <%- include('./layout') %>
+      <div>
+        <h2>Folder: <%= folder.name %></h2>
+        <p>
+          Date created: <%= folder.dateCreated.toLocaleDateString() %> <%=
+          folder.dateCreated.getHours() %>:<%= folder.dateCreated.getMinutes()
+          %>:<%= folder.dateCreated.getSeconds() %>
+        </p>
+
+        <% if (files) { %> <% if (files.length) { %>
+        <h3>Files:</h3>
+        <% files.forEach(file => { %>
+        <h4>Name: <%= file.name %></h4>
+        <p>
+          Uploaded: <%= file.dateUploaded.toLocaleDateString() %> <%=
+          file.dateUploaded.getHours() %>:<%= file.dateUploaded.getMinutes()
+          %>:<%= file.dateUploaded.getSeconds() %>
+        </p>
+        <a href="<%= '/download-file/' + file.id %>"
+          ><button>Download File</button></a
+        >
+        <br />
+        <br />
+        <br />
+        <a href="<%= '/delete-file/' + file.id %>"
+          ><button>Delete File</button></a
+        >
+        <br />
+        <br />
+        <br />
+        <% }) %> <% } %> <% } else { %>
+        <p>This folder is empty.</p>
+        <% } %>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <a href="<%= '/upload-file/' + folder.id %>"
+          ><button>Upload a File</button></a
+        >
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <a href="<%= '/delete-folder/' + folder.id %>"
+          ><button>Delete Folder</button></a
+        >
+        <br />
+        <% if (errors) { %> <% errors.forEach(error => { %>
+        <li>
+          <p><%= error.msg %></p>
+        </li>
+        <% }) %> <% } %> <% if (message !== null) { %>
+        <p><%= message %></p>
+        <% } %>
+      </div>
+    </div>
+  </body>
+</html>

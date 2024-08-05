@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1><% title %></h1>
+    <div style="display: flex; gap: 100px">
+      <%- include('./layout') %>
+      <div>
+        <h2>Folder: <%= folder.name %></h2>
+        <p>
+          Date created: <%= folder.dateCreated.toLocaleDateString() %> <%=
+          folder.dateCreated.getHours() %>:<%= folder.dateCreated.getMinutes()
+          %>:<%= folder.dateCreated.getSeconds() %>
+        </p>
+
+        <p>Do you really want to delete this Folder?</p>
+        <% if (files) { %> <% if (files.length) { %>
+        <p>The following files will be deleted:</p>
+        <% files.forEach(file => { %>
+        <h4>Name: <%= file.name %></h4>
+        <p>
+          Uploaded: <%= file.dateUploaded.toLocaleDateString() %> <%=
+          file.dateUploaded.getHours() %>:<%= file.dateUploaded.getMinutes()
+          %>:<%= file.dateUploaded.getSeconds() %>
+        </p>
+        <% }) %> <% } %> <% } else { %>
+        <p>This folder is empty.</p>
+        <% } %>
+        <form method="POST">
+          <div class="form.group">
+            <input type="hidden" name="folderid" value="<%= folder.id %>" />
+            <br />
+
+            <button type="submit" class="btn-primary">Delete</button>
+          </div>
+        </form>
+        <br />
+        <% if (errors) { %> <% errors.forEach(error => { %>
+        <li>
+          <p><%= error.msg %></p>
+        </li>
+        <% }) %> <% } %> <% if (message !== null) { %>
+        <p><%= message %></p>
+        <% } %>
+      </div>
+    </div>
+  </body>
+</html>

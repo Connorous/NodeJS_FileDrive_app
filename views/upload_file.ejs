@@ -1,0 +1,26 @@
+<html>
+  <body>
+    <div style="display: flex; gap: 100px">
+      <%- include('./layout') %>
+      <div>
+        <h2>Upload File to Folder: <% folder.name %></h2>
+        <form method="POST" enctype="multipart/form-data">
+          <label for="File">File: </label>
+          <input type="file" name="uploaded_file" />
+          <br />
+          <br />
+          <br />
+          <button type="submit">Upload</button>
+        </form>
+        <br />
+        <% if (errors) { %> <% errors.forEach(error => { %>
+        <li>
+          <p><%= error.msg %></p>
+        </li>
+        <% }) %> <% } %> <% if (message !== null) { %>
+        <p><%= message %></p>
+        <% } %>
+      </div>
+    </div>
+  </body>
+</html>
